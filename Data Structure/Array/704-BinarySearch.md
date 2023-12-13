@@ -17,13 +17,14 @@ Input: nums = [-1,0,3,5,9,12], target = 2
 Output: -1
 Explanation: 2 does not exist in nums so return -1
 ```
-### easy
+- easy  
+- target between [left, right]
 ```
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         left = 0
-        right = len(nums) - 1
-        
+        right = len(nums) - 1 
+
         while left <= right:
             mid = left + (right-left)//2
             if target == nums[mid]:
@@ -32,6 +33,24 @@ class Solution:
                 left = mid + 1
             elif target < nums[mid]:
                 right = mid-1
+            
+        return -1
+```
+- target between [left, right)
+```
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left = 0
+        right = len(nums) # target between [left, right)
+        
+        while left < right:
+            mid = left + (right-left)//2
+            if target == nums[mid]:
+                return mid
+            elif target > nums[mid]:
+                left = mid + 1
+            elif target < nums[mid]:
+                right = mid
             
         return -1
 ```
